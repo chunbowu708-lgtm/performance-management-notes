@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绩效管理速通笔记 · 咨询新人参会指南</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Noto Sans SC', 'system-ui', 'sans-serif'] }
+    }
+  }
+}
+</script>
+<style>
+:root {
+  --card-bg: rgba(255,255,255,0.82);
+  --card-border: rgba(245,158,11,0.13);
+  --shadow-soft: 0 4px 24px rgba(120,53,15,0.06), 0 1px 4px rgba(120,53,15,0.04);
+  --shadow-hover: 0 12px 48px rgba(120,53,15,0.10), 0 2px 8px rgba(120,53,15,0.06);
+}
+body { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+  background: linear-gradient(90deg, #F59E0B, #10B981, #F59E0B);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease infinite;
+  transition: width 0.15s ease-out;
+}
+@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.bento-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  opacity: 0;
+  transform: translateY(32px);
+}
+.bento-card.visible { opacity: 1; transform: translateY(0); }
+.bento-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+  border-color: rgba(245,158,11,0.25);
+}
+.card-icon {
+  width: 42px; height: 42px; border-radius: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.tag {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  font-size: 13px; font-weight: 500; transition: transform 0.2s;
+}
+.tag:hover { transform: scale(1.05); }
+.check-item input:checked + span { text-decoration: line-through; opacity: 0.45; }
+.check-item { transition: all 0.2s; cursor: pointer; }
+.check-item:hover { background: rgba(245,158,11,0.04); border-radius: 10px; }
+.callout {
+  padding: 14px 18px; border-radius: 14px; border-left: 4px solid;
+  margin: 12px 0; font-size: 14px;
+}
+.scenario-box {
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px; padding: 18px;
+  transition: all 0.3s;
+}
+.scenario-box:hover { border-color: rgba(245,158,11,0.3); box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+#back-to-top {
+  position: fixed; bottom: 32px; right: 32px;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white; border: none; cursor: pointer;
+  font-size: 22px; z-index: 999;
+  box-shadow: 0 4px 16px rgba(217,119,6,0.35);
+  transition: all 0.3s; opacity: 0; transform: translateY(20px);
+  pointer-events: none;
+}
+#back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+#back-to-top:hover { transform: translateY(-4px) scale(1.08); }
+html { scroll-behavior: smooth; }
+@media (max-width: 768px) { .bento-card { padding: 20px; border-radius: 18px; } }
+</style>
+</head>
+
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6" style="grid-auto-flow:dense">
+
+<!-- ===== Card 1: Hero (2col) ===== -->
+<section class="bento-card lg:col-span-2 relative overflow-hidden" style="transition-delay:0ms">
+  <div class="absolute -top-16 -right-16 w-56 h-56 bg-amber-200/30 rounded-full blur-3xl"></div>
+  <div class="absolute -bottom-12 -left-12 w-44 h-44 bg-emerald-200/20 rounded-full blur-3xl"></div>
+  <div class="relative z-10">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="card-icon bg-amber-100">🍄</div>
+      <span class="tag bg-amber-100 text-amber-700">乙方咨询新人 · 快速入门</span>
+    </div>
+    <h1 class="text-3xl lg:text-4xl font-black text-stone-900 mb-3 leading-tight">绩效管理速通笔记</h1>
+    <p class="text-stone-500 text-base lg:text-lg mb-5 max-w-xl">上市公司战略研讨会 & 绩效沟通会参会前必备。<br>从「完全不懂」到「知道在发生什么」——帮你补上最关键的知识缺口。</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="tag bg-emerald-50 text-emerald-700 border border-emerald-200/60">🎯 战略解码</span>
+      <span class="tag bg-rose-50 text-rose-700 border border-rose-200/60">📊 KPI / OKR</span>
+      <span class="tag bg-sky-50 text-sky-700 border border-sky-200/60">💼 咨询顾问角色</span>
+      <span class="tag bg-violet-50 text-violet-700 border border-violet-200/60">🏛️ 上市公司特辑</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Card 2: 参会准备清单 ===== -->
+<section class="bento-card" style="transition-delay:60ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-emerald-100">✅</div>
+    <h2 class="text-lg font-bold text-stone-900">参会准备清单</h2>
+  </div>
+  <div class="space-y-2" id="checklist">
+    <label class="check-item flex items-start gap-3 p-2"><input type="checkbox" class="mt-1 accent-amber-500 w-4 h-4 flex-shrink-0"><span class="text-stone-700 text-sm leading-relaxed">了解客户公司年报、行业排名、主营业务和最近重大事件</span></label>
+    <label class="check-item flex items-start gap-3 p-2"><input type="checkbox" class="mt-1 accent-amber-500 w-4 h-4 flex-shrink-0"><span class="text-stone-700 text-sm leading-relaxed">熟悉本次项目背景、合同范围和关键交付物</span></label>
+    <label class="check-item flex items-start gap-3 p-2"><input type="checkbox" class="mt-1 accent-amber-500 w-4 h-4 flex-shrink-0"><span class="text-stone-700 text-sm leading-relaxed">确认参会人员名单，搞清楚谁是谁</span></label>
+    <label class="check-item flex items-start gap-3 p-2"><input type="checkbox" class="mt-1 accent-amber-500 w-4 h-4 flex-shrink-0"><span class="text-stone-700 text-sm leading-relaxed">准备记录工具：纸质笔记本 + 电子各一份</span></label>
+    <label class="check-item flex items-start gap-3 p-2"><input type="checkbox" class="mt-1 accent-amber-500 w-4 h-4 flex-shrink-0"><span class="text-stone-700 text-sm leading-relaxed">提前到场 15 分钟，观察环境和氛围</span></label>
+    <label class="check-item flex items-start gap-3 p-2"><input type="checkbox" class="mt-1 accent-amber-500 w-4 h-4 flex-shrink-0"><span class="text-stone-700 text-sm leading-relaxed">准备 2-3 个可在适当时机提出的好问题</span></label>
+  </div>
+  <p class="text-xs text-stone-400 mt-3">勾选自动保存到浏览器</p>
+</section>
+
+<!-- ===== Card 3: 绩效管理到底是什么 (tall) ===== -->
+<section class="bento-card lg:row-span-2" style="transition-delay:120ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-rose-100">🧠</div>
+    <h2 class="text-lg font-bold text-stone-900">绩效管理到底是什么</h2>
+  </div>
+  <div class="callout border-amber-400 bg-amber-50 mb-4">
+    <p class="text-stone-800 font-medium text-sm">一句话本质：把「公司要什么」翻译成「每个人该干什么、干成什么样」</p>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-3">三个层次，各有各的目的</h3>
+  <div class="space-y-3 mb-5">
+    <div class="flex gap-3 items-start"><span class="tag bg-amber-100 text-amber-700 text-xs mt-0.5 whitespace-nowrap">战略层</span><p class="text-stone-600 text-sm">确保所有人朝着同一个方向使劲。战略不是挂在墙上的口号，是要落地的</p></div>
+    <div class="flex gap-3 items-start"><span class="tag bg-emerald-100 text-emerald-700 text-xs mt-0.5 whitespace-nowrap">管理层</span><p class="text-stone-600 text-sm">给管理者提供抓手——谁该提拔、谁该培训、奖金怎么分、团队怎么调整</p></div>
+    <div class="flex gap-3 items-start"><span class="tag bg-sky-100 text-sky-700 text-xs mt-0.5 whitespace-nowrap">员工层</span><p class="text-stone-600 text-sm">让每个人清楚「组织对我的期望是什么」「我干得好不好」「怎么改进」</p></div>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-3">⚠️ 最大的认知误区</h3>
+  <div class="grid grid-cols-2 gap-3 mb-5">
+    <div class="bg-stone-50 rounded-xl p-3 text-center">
+      <p class="text-stone-400 text-xs mb-1">❌ 绩效考核</p>
+      <p class="text-stone-700 text-sm font-medium">打分、排名、分钱</p>
+      <p class="text-stone-400 text-xs mt-1">一个时间点的动作</p>
+    </div>
+    <div class="bg-amber-50 rounded-xl p-3 text-center border border-amber-200/60">
+      <p class="text-amber-600 text-xs mb-1">✅ 绩效管理</p>
+      <p class="text-stone-700 text-sm font-medium">目标→辅导→评估→改进</p>
+      <p class="text-amber-600 text-xs mt-1">一个持续的管理过程</p>
+    </div>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-3">为什么上市公司特别重视？</h3>
+  <ul class="space-y-2 text-sm text-stone-600">
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>股东关注业绩承诺能否兑现——年报要写</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>股权激励需要绩效结果做解锁依据</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>高管薪酬与绩效挂钩需对外披露</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>信息披露要求过程透明、规则公正</li>
+  </ul>
+</section>
+
+<!-- ===== Card 4: 战略解码 (2col) ===== -->
+<section class="bento-card lg:col-span-2" style="transition-delay:180ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-violet-100">🔗</div>
+    <h2 class="text-lg font-bold text-stone-900">战略解码：战略如何变成绩效</h2>
+  </div>
+  <p class="text-stone-500 text-sm mb-4">战略研讨会最核心的议题——怎么把公司三年规划翻译成每个人明天的 KPI</p>
+  <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-5 mb-5">
+    <h3 class="font-semibold text-stone-800 text-sm mb-4">解码链路（从上到下层层分解）</h3>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+      <div class="bg-white/80 rounded-xl p-3 text-center"><div class="text-xs text-stone-400 mb-1">Level 1</div><p class="font-semibold text-stone-800 text-sm">公司战略</p><p class="text-stone-500 text-xs">5年愿景+3年目标</p></div>
+      <div class="bg-white/80 rounded-xl p-3 text-center"><div class="text-xs text-stone-400 mb-1">Level 2</div><p class="font-semibold text-stone-800 text-sm">部门目标</p><p class="text-stone-500 text-xs">每部门3-6个关键目标</p></div>
+      <div class="bg-white/80 rounded-xl p-3 text-center"><div class="text-xs text-stone-400 mb-1">Level 3</div><p class="font-semibold text-stone-800 text-sm">岗位目标</p><p class="text-stone-500 text-xs">每人3-5个具体指标</p></div>
+      <div class="bg-white/80 rounded-xl p-3 text-center"><div class="text-xs text-stone-400 mb-1">Level 4</div><p class="font-semibold text-stone-800 text-sm">行为要求</p><p class="text-stone-500 text-xs">能力模型+行为标准</p></div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <h3 class="font-semibold text-stone-800 text-sm mb-3">🗺️ 战略地图（Strategy Map）</h3>
+      <p class="text-stone-600 text-sm mb-2">从下往上支撑的逻辑链：</p>
+      <div class="space-y-1 text-sm">
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-400 flex-shrink-0"></span><span class="text-stone-700">学习成长 → 员工能力、IT系统、组织文化</span></div>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-sky-400 flex-shrink-0"></span><span class="text-stone-700">内部流程 → 运营效率、创新流程、合规风控</span></div>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0"></span><span class="text-stone-700">客户层面 → 市占率、满意度、品牌认知</span></div>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-rose-400 flex-shrink-0"></span><span class="text-stone-700">财务层面 → 营收增长、成本控制、利润率</span></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-semibold text-stone-800 text-sm mb-3">👁️ 你在会上重点观察什么</h3>
+      <ul class="space-y-2 text-sm text-stone-600">
+        <li class="flex gap-2"><span class="text-amber-500">▸</span>战略目标是否<strong>清晰可量化</strong>，还是只是口号</li>
+        <li class="flex gap-2"><span class="text-amber-500">▸</span>各部门目标之间有没有<strong>冲突或重叠</strong></li>
+        <li class="flex gap-2"><span class="text-amber-500">▸</span>谁在「争资源」，谁在「推责任」——这就是政治</li>
+        <li class="flex gap-2"><span class="text-amber-500">▸</span>哪些是「真目标」，哪些是「说说而已」</li>
+        <li class="flex gap-2"><span class="text-amber-500">▸</span>CEO 最后拍板的表述——这才是真正的方向</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Card 5: KPI ===== -->
+<section class="bento-card" style="transition-delay:240ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-amber-100">📊</div>
+    <h2 class="text-lg font-bold text-stone-900">核心方法论：KPI</h2>
+    <span class="tag bg-amber-50 text-amber-600 text-xs">最常用</span>
+  </div>
+  <div class="callout border-amber-400 bg-amber-50 mb-4">
+    <p class="text-stone-700 text-sm"><strong>Key Performance Indicator</strong> —— 用少数关键指标衡量核心成果</p>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">SMART 原则</h3>
+  <div class="space-y-1 mb-4 text-sm">
+    <div class="flex gap-2"><span class="text-amber-600 font-bold w-5 flex-shrink-0">S</span><span class="text-stone-600">Specific 具体——「提升业绩」不行，要「营收增长15%」</span></div>
+    <div class="flex gap-2"><span class="text-amber-600 font-bold w-5 flex-shrink-0">M</span><span class="text-stone-600">Measurable 可量化——有数据可以衡量</span></div>
+    <div class="flex gap-2"><span class="text-amber-600 font-bold w-5 flex-shrink-0">A</span><span class="text-stone-600">Achievable 可达成——跳一跳够得着</span></div>
+    <div class="flex gap-2"><span class="text-amber-600 font-bold w-5 flex-shrink-0">R</span><span class="text-stone-600">Relevant 相关——和战略目标有因果关系</span></div>
+    <div class="flex gap-2"><span class="text-amber-600 font-bold w-5 flex-shrink-0">T</span><span class="text-stone-600">Time-bound 有时限——明确截止时间</span></div>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">领先指标 vs 滞后指标</h3>
+  <div class="grid grid-cols-2 gap-2 mb-4">
+    <div class="bg-emerald-50 rounded-xl p-3"><p class="text-emerald-700 text-xs font-semibold mb-1">领先指标 Leading</p><p class="text-stone-600 text-xs">过程指标，能<strong>预测</strong>结果</p><p class="text-stone-500 text-xs mt-1">例：客户拜访量、培训时长</p></div>
+    <div class="bg-rose-50 rounded-xl p-3"><p class="text-rose-700 text-xs font-semibold mb-1">滞后指标 Lagging</p><p class="text-stone-600 text-xs">结果指标，<strong>已成事实</strong></p><p class="text-stone-500 text-xs mt-1">例：季度销售额、利润率</p></div>
+  </div>
+  <h3 class="font-semibold text-rose-700 text-sm mb-2">⚠️ 常见陷阱</h3>
+  <ul class="space-y-1 text-xs text-stone-600">
+    <li>❌ 指标太多（超过 5 个就失去焦点）</li>
+    <li>❌ 全是滞后指标（事后诸葛亮）</li>
+    <li>❌ 指标互斥（追求 A 就损害 B）</li>
+    <li>❌ 「容易量化」替代了「真正重要」</li>
+  </ul>
+</section>
+
+<!-- ===== Card 6: OKR ===== -->
+<section class="bento-card" style="transition-delay:300ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-sky-100">🎯</div>
+    <h2 class="text-lg font-bold text-stone-900">核心方法论：OKR</h2>
+    <span class="tag bg-sky-50 text-sky-600 text-xs">创新型</span>
+  </div>
+  <div class="callout border-sky-400 bg-sky-50 mb-4">
+    <p class="text-stone-700 text-sm"><strong>Objectives & Key Results</strong> —— 源自 Intel，Google 发扬光大</p>
+  </div>
+  <div class="grid grid-cols-2 gap-3 mb-4">
+    <div class="bg-sky-50 rounded-xl p-3"><p class="text-sky-700 text-xs font-semibold mb-1">O 目标</p><p class="text-stone-600 text-xs">定性描述，有方向感和激励性</p><p class="text-stone-500 text-xs mt-1 italic">「成为行业技术标杆」</p></div>
+    <div class="bg-sky-50 rounded-xl p-3"><p class="text-sky-700 text-xs font-semibold mb-1">KR 关键成果</p><p class="text-stone-600 text-xs">2-5 个，定量可衡量</p><p class="text-stone-500 text-xs mt-1 italic">「核心产品 NPS ≥ 70」</p></div>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">与 KPI 的本质区别</h3>
+  <div class="bg-amber-50 rounded-xl p-3 mb-4">
+    <div class="space-y-2 text-xs text-stone-600">
+      <p><strong class="text-stone-800">KPI</strong>：必须在考核期内达标（契约型，完不成就是失败）</p>
+      <p><strong class="text-stone-800">OKR</strong>：完成 70% 就算成功（挑战型，鼓励野心）</p>
+      <p class="text-amber-700 font-medium">OKR 不直接挂钩薪酬！挂钩了就没人敢定挑战目标了</p>
+    </div>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">适用场景</h3>
+  <div class="space-y-1 text-xs text-stone-600">
+    <p class="flex gap-2"><span class="text-emerald-500">✓</span>创新业务、快速变化的环境</p>
+    <p class="flex gap-2"><span class="text-emerald-500">✓</span>知识型员工为主的团队</p>
+    <p class="flex gap-2"><span class="text-emerald-500">✓</span>需要跨部门协作的目标</p>
+    <p class="flex gap-2"><span class="text-rose-500">✗</span>成熟业务、标准化流水线</p>
+    <p class="flex gap-2"><span class="text-rose-500">✗</span>短期业绩压力极大的场景</p>
+  </div>
+</section>
+
+<!-- ===== Card 7: BSC / 360° / MBO ===== -->
+<section class="bento-card" style="transition-delay:360ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-violet-100">🧩</div>
+    <h2 class="text-lg font-bold text-stone-900">其他方法论速览</h2>
+  </div>
+  <div class="bg-gradient-to-r from-violet-50 to-purple-50 rounded-xl p-4 mb-3">
+    <div class="flex items-center gap-2 mb-2"><span class="tag bg-violet-100 text-violet-700 text-xs">BSC</span><span class="text-stone-800 text-sm font-semibold">平衡计分卡</span></div>
+    <p class="text-stone-600 text-xs mb-2">从四个维度全面评估，防止企业只看财务数字</p>
+    <div class="grid grid-cols-2 gap-1 text-xs">
+      <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-400"></span>财务：营收、利润</div>
+      <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span>客户：满意度、市占率</div>
+      <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-400"></span>流程：效率、质量</div>
+      <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>成长：培训、创新</div>
+    </div>
+    <p class="text-violet-600 text-xs mt-2">适合：中高层管理者的综合评价</p>
+  </div>
+  <div class="bg-gradient-to-r from-sky-50 to-cyan-50 rounded-xl p-4 mb-3">
+    <div class="flex items-center gap-2 mb-2"><span class="tag bg-sky-100 text-sky-700 text-xs">360°</span><span class="text-stone-800 text-sm font-semibold">360度评估</span></div>
+    <p class="text-stone-600 text-xs mb-1">上级+平级+下属+自评，多角度反馈</p>
+    <p class="text-stone-500 text-xs">适合：领导力发展、人才盘点。⚠️ 风险：容易变「关系分」</p>
+  </div>
+  <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-4">
+    <div class="flex items-center gap-2 mb-2"><span class="tag bg-emerald-100 text-emerald-700 text-xs">MBO</span><span class="text-stone-800 text-sm font-semibold">目标管理</span></div>
+    <p class="text-stone-600 text-xs">德鲁克提出，强调上下级协商制定目标。KPI 的前身，现在很少单独使用。</p>
+  </div>
+</section>
+
+<!-- ===== Card 8: 工具对比 (2col) ===== -->
+<section class="bento-card lg:col-span-2" style="transition-delay:420ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-teal-100">⚖️</div>
+    <h2 class="text-lg font-bold text-stone-900">工具对比 & 指标设计原则</h2>
+  </div>
+  <div class="overflow-x-auto mb-5">
+    <table class="w-full text-sm">
+      <thead><tr class="border-b border-stone-200">
+        <th class="text-left p-3 text-stone-500 font-medium">维度</th>
+        <th class="text-left p-3 text-amber-700 font-medium">KPI</th>
+        <th class="text-left p-3 text-sky-700 font-medium">OKR</th>
+        <th class="text-left p-3 text-violet-700 font-medium">BSC</th>
+        <th class="text-left p-3 text-teal-700 font-medium">360°</th>
+      </tr></thead>
+      <tbody class="text-stone-600">
+        <tr class="border-b border-stone-100"><td class="p-3 text-stone-800 font-medium">核心目的</td><td class="p-3">衡量关键成果</td><td class="p-3">激发挑战野心</td><td class="p-3">全面平衡评估</td><td class="p-3">多角度反馈</td></tr>
+        <tr class="border-b border-stone-100"><td class="p-3 text-stone-800 font-medium">目标达成率</td><td class="p-3">100% 为达标</td><td class="p-3">70% 即成功</td><td class="p-3">看四维平衡</td><td class="p-3">看综合评分</td></tr>
+        <tr class="border-b border-stone-100"><td class="p-3 text-stone-800 font-medium">挂钩薪酬</td><td class="p-3 text-amber-600 font-medium">✓ 通常挂钩</td><td class="p-3 text-sky-600 font-medium">✗ 建议不挂钩</td><td class="p-3">部分挂钩</td><td class="p-3">通常不挂钩</td></tr>
+        <tr class="border-b border-stone-100"><td class="p-3 text-stone-800 font-medium">适用对象</td><td class="p-3">全员</td><td class="p-3">知识型/创新团队</td><td class="p-3">中高层为主</td><td class="p-3">管理者</td></tr>
+        <tr><td class="p-3 text-stone-800 font-medium">适用阶段</td><td class="p-3">成熟业务</td><td class="p-3">变革期/创业期</td><td class="p-3">战略转型</td><td class="p-3">人才发展</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 class="font-semibold text-stone-800 text-sm mb-3">指标设计五原则</h3>
+  <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+    <div class="bg-amber-50 rounded-xl p-3 text-center"><div class="text-2xl mb-1">🎯</div><p class="text-stone-800 text-xs font-semibold">战略导向</p><p class="text-stone-500 text-xs mt-1">每个指标都能追溯到战略</p></div>
+    <div class="bg-emerald-50 rounded-xl p-3 text-center"><div class="text-2xl mb-1">✂️</div><p class="text-stone-800 text-xs font-semibold">少而精</p><p class="text-stone-500 text-xs mt-1">部门≤6个，个人≤5个</p></div>
+    <div class="bg-sky-50 rounded-xl p-3 text-center"><div class="text-2xl mb-1">🎮</div><p class="text-stone-800 text-xs font-semibold">可控性</p><p class="text-stone-500 text-xs mt-1">被考核人对指标有影响力</p></div>
+    <div class="bg-violet-50 rounded-xl p-3 text-center"><div class="text-2xl mb-1">⚖️</div><p class="text-stone-800 text-xs font-semibold">平衡性</p><p class="text-stone-500 text-xs mt-1">短期/长期、财务/非财务兼顾</p></div>
+    <div class="bg-rose-50 rounded-xl p-3 text-center"><div class="text-2xl mb-1">🔄</div><p class="text-stone-800 text-xs font-semibold">动态调整</p><p class="text-stone-500 text-xs mt-1">随战略变化而调整</p></div>
+  </div>
+</section>
+
+<!-- ===== Card 9: 咨询项目全流程 (3col) ===== -->
+<section class="bento-card lg:col-span-3" style="transition-delay:480ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-stone-100">🗺️</div>
+    <h2 class="text-lg font-bold text-stone-900">绩效咨询项目全流程</h2>
+    <span class="tag bg-stone-100 text-stone-600 text-xs">了解你在哪个位置</span>
+  </div>
+  <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+    <div class="bg-gradient-to-b from-amber-50 to-white rounded-xl p-4 border border-amber-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold">1</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">需求澄清</p>
+      <p class="text-stone-500 text-xs mt-1">客户到底想解决什么？分钱不公？战略落不了地？</p>
+    </div>
+    <div class="bg-gradient-to-b from-orange-50 to-white rounded-xl p-4 border border-orange-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">现状诊断</p>
+      <p class="text-stone-500 text-xs mt-1">访谈、问卷、数据收集。找真问题不是找表面问题</p>
+    </div>
+    <div class="bg-gradient-to-b from-rose-50 to-white rounded-xl p-4 border border-rose-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-rose-500 text-white text-xs flex items-center justify-center font-bold">3</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">方案设计</p>
+      <p class="text-stone-500 text-xs mt-1">目标体系+考核方法+结果应用。这步最见功力</p>
+    </div>
+    <div class="bg-gradient-to-b from-violet-50 to-white rounded-xl p-4 border border-violet-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-violet-500 text-white text-xs flex items-center justify-center font-bold">4</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">方案评审</p>
+      <p class="text-stone-500 text-xs mt-1">和客户逐条确认。别指望一次过，至少改三轮</p>
+    </div>
+    <div class="bg-gradient-to-b from-sky-50 to-white rounded-xl p-4 border border-sky-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-sky-500 text-white text-xs flex items-center justify-center font-bold">5</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">试点运行</p>
+      <p class="text-stone-500 text-xs mt-1">选1-2个部门试水。暴露问题，收集反馈</p>
+    </div>
+    <div class="bg-gradient-to-b from-emerald-50 to-white rounded-xl p-4 border border-emerald-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">6</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">全面推广</p>
+      <p class="text-stone-500 text-xs mt-1">全公司落地。配套培训和宣贯</p>
+    </div>
+    <div class="bg-gradient-to-b from-teal-50 to-white rounded-xl p-4 border border-teal-100 relative">
+      <div class="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-teal-500 text-white text-xs flex items-center justify-center font-bold">7</div>
+      <p class="font-semibold text-stone-800 text-sm mt-1">持续优化</p>
+      <p class="text-stone-500 text-xs mt-1">根据反馈调整。绩效体系不是一锤子买卖</p>
+    </div>
+  </div>
+  <div class="callout border-amber-400 bg-amber-50 mt-4">
+    <p class="text-stone-700 text-sm">💡 <strong>你大概率在阶段 2-3</strong>：战略研讨会是诊断的一部分，绩效沟通会是方案落地的前奏。搞清楚项目当前阶段，你就知道会上该重点关注什么。</p>
+  </div>
+</section>
+
+<!-- ===== Card 10: 战略研讨会 (2col) ===== -->
+<section class="bento-card lg:col-span-2" style="transition-delay:540ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-rose-100">🏛️</div>
+    <h2 class="text-lg font-bold text-stone-900">战略研讨会：深度拆解</h2>
+    <span class="tag bg-rose-50 text-rose-600 text-xs">重点会议</span>
+  </div>
+  <p class="text-stone-500 text-sm mb-4">高管团队讨论战略方向的会议。绩效体系是战略落地的工具，所以战略研讨是起点。你在这个会上主要是<strong>观察和记录</strong>。</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <div>
+      <h3 class="font-semibold text-stone-800 text-sm mb-3">📋 典型议程（心里有个数）</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex gap-2 items-start"><span class="text-amber-500 font-bold w-5 flex-shrink-0">1</span><div><p class="text-stone-700 font-medium">CEO / 战略负责人介绍方向</p><p class="text-stone-500 text-xs">听关键词、核心数字、语气——看出真正的优先级</p></div></div>
+        <div class="flex gap-2 items-start"><span class="text-amber-500 font-bold w-5 flex-shrink-0">2</span><div><p class="text-stone-700 font-medium">各业务单元汇报执行情况</p><p class="text-stone-500 text-xs">谁在「表功」、谁在「求救」、谁在「甩锅」</p></div></div>
+        <div class="flex gap-2 items-start"><span class="text-amber-500 font-bold w-5 flex-shrink-0">3</span><div><p class="text-stone-700 font-medium">分组讨论：战略重点和关键举措</p><p class="text-stone-500 text-xs">你可能在记录组或旁听——记核心观点和分歧</p></div></div>
+        <div class="flex gap-2 items-start"><span class="text-amber-500 font-bold w-5 flex-shrink-0">4</span><div><p class="text-stone-700 font-medium">集体讨论：目标分解和资源分配</p><p class="text-stone-500 text-xs">这是「分蛋糕」环节，敏感度最高</p></div></div>
+        <div class="flex gap-2 items-start"><span class="text-amber-500 font-bold w-5 flex-shrink-0">5</span><div><p class="text-stone-700 font-medium">总结和行动项确认</p><p class="text-stone-500 text-xs">CEO 的总结发言 = 真正的结论</p></div></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-semibold text-stone-800 text-sm mb-3">📝 你必须记的东西</h3>
+      <div class="space-y-2 text-sm text-stone-600">
+        <div class="bg-amber-50 rounded-lg p-2.5"><strong class="text-stone-800">战略关键词</strong>：客户高管反复出现的词——这些是核心关切</div>
+        <div class="bg-rose-50 rounded-lg p-2.5"><strong class="text-stone-800">争议点</strong>：谁和谁意见不一致——这是真正的议题</div>
+        <div class="bg-emerald-50 rounded-lg p-2.5"><strong class="text-stone-800">行动项</strong>：会后谁做什么、什么时间——这是交付物</div>
+        <div class="bg-sky-50 rounded-lg p-2.5"><strong class="text-stone-800">非语言信号</strong>：谁的表情不对、谁在交头接耳——这些不会出现在纪要里</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout border-rose-400 bg-rose-50">
+    <p class="text-stone-700 text-sm">🔑 <strong>核心洞察</strong>：发言最多的人 ≠ 最有影响力。看谁说话时其他人会点头，谁说话时大家低头——那才是真正的权力格局。</p>
+  </div>
+</section>
+
+<!-- ===== Card 11: 绩效沟通会 ===== -->
+<section class="bento-card" style="transition-delay:600ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-sky-100">💬</div>
+    <h2 class="text-lg font-bold text-stone-900">绩效沟通会</h2>
+    <span class="tag bg-sky-50 text-sky-600 text-xs">敏感场景</span>
+  </div>
+  <p class="text-stone-500 text-sm mb-4">向管理层/员工沟通绩效方案或结果的会。涉及利益分配，氛围通常比较紧张。</p>
+
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">三种类型</h3>
+  <div class="space-y-2 mb-4">
+    <div class="bg-amber-50 rounded-xl p-3"><p class="text-stone-800 text-xs font-semibold">方案宣贯会</p><p class="text-stone-600 text-xs">发布新绩效方案，解释「为什么这样设计」</p></div>
+    <div class="bg-rose-50 rounded-xl p-3"><p class="text-stone-800 text-xs font-semibold">结果反馈会</p><p class="text-stone-600 text-xs">告知考核结果，一对一为主，最容易起冲突</p></div>
+    <div class="bg-violet-50 rounded-xl p-3"><p class="text-stone-800 text-xs font-semibold">绩效改进沟通</p><p class="text-stone-600 text-xs">PIP 面谈，针对绩效不达标的员工</p></div>
+  </div>
+
+  <h3 class="font-semibold text-rose-700 text-sm mb-2">⚠️ 敏感话题预警</h3>
+  <ul class="space-y-1 text-xs text-stone-600">
+    <li>「这个指标不合理」→ 员工觉得被不公平对待</li>
+    <li>「绩效奖金怎么算」→ 利益分配是最敏感的雷区</li>
+    <li>「我和 XX 干的一样多为什么分低」→ 主观评价的永恒争议</li>
+    <li>「去年不是这么定的」→ 新旧方案切换期的抵触</li>
+  </ul>
+
+  <div class="callout border-sky-400 bg-sky-50 mt-3">
+    <p class="text-stone-700 text-sm">你的角色：<strong>记录问题和反对意见</strong>，观察哪些问题被回避了。遇到专业问题别硬答，说「我记下来会后确认」。</p>
+  </div>
+</section>
+
+<!-- ===== Card 12: 上市公司绩效特色 ===== -->
+<section class="bento-card" style="transition-delay:660ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-violet-100">🏛️</div>
+    <h2 class="text-lg font-bold text-stone-900">上市公司绩效特色</h2>
+  </div>
+  <p class="text-stone-500 text-sm mb-4">上市公司做绩效，和普通公司不一样。多了一堆「外部约束」。</p>
+  <div class="space-y-3">
+    <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold mb-1">💰 股权激励（最强杠杆）</p>
+      <p class="text-stone-600 text-xs">限制性股票、期权、股票增值权。解锁条件绑定绩效指标——完不成，股票拿不到</p>
+    </div>
+    <div class="bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold mb-1">📢 信息披露（合规要求）</p>
+      <p class="text-stone-600 text-xs">高管薪酬与绩效挂钩需在年报披露。股权激励计划必须公告。规则必须透明</p>
+    </div>
+    <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold mb-1">🌍 ESG 因素（趋势）</p>
+      <p class="text-stone-600 text-xs">越来越多公司将环保、社会责任纳入绩效。特别是赴港/美上市和大型国企</p>
+    </div>
+    <div class="bg-gradient-to-r from-sky-50 to-cyan-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold mb-1">📊 投资者关系（外部压力）</p>
+      <p class="text-stone-600 text-xs">绩效目标影响分析师预期。业绩承诺未兑现 → 股价波动 → 舆论压力</p>
+    </div>
+    <div class="bg-gradient-to-r from-violet-50 to-purple-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold mb-1">⚖️ 监管约束</p>
+      <p class="text-stone-600 text-xs">国资委对国企有明确绩效评价办法。交易所对股权激励有规则限制</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Card 13: 实战场景模拟 (2col) ===== -->
+<section class="bento-card lg:col-span-2" style="transition-delay:720ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-emerald-100">🎭</div>
+    <h2 class="text-lg font-bold text-stone-900">实战场景模拟</h2>
+    <span class="tag bg-emerald-50 text-emerald-600 text-xs">提前演练</span>
+  </div>
+  <p class="text-stone-500 text-sm mb-4">这些场景很可能会遇到。提前想好怎么应对，会上就不会慌。</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="scenario-box">
+      <div class="flex items-center gap-2 mb-2"><span class="text-amber-500 font-bold text-sm">场景 1</span><span class="text-stone-800 text-sm font-semibold">有人问你是谁</span></div>
+      <div class="bg-stone-50 rounded-lg p-3 mb-2">
+        <p class="text-stone-600 text-xs italic">「这位是？」</p>
+      </div>
+      <div class="bg-amber-50 rounded-lg p-3">
+        <p class="text-stone-700 text-xs">✅ 「我是XX咨询的顾问，协助本次绩效优化项目。」</p>
+        <p class="text-stone-500 text-xs mt-1">简洁、自信、不卑不亢。不要解释太多。</p>
+      </div>
+    </div>
+
+    <div class="scenario-box">
+      <div class="flex items-center gap-2 mb-2"><span class="text-rose-500 font-bold text-sm">场景 2</span><span class="text-stone-800 text-sm font-semibold">高管突然问你意见</span></div>
+      <div class="bg-stone-50 rounded-lg p-3 mb-2">
+        <p class="text-stone-600 text-xs italic">「小X，你怎么看？」</p>
+      </div>
+      <div class="bg-rose-50 rounded-lg p-3">
+        <p class="text-stone-700 text-xs">✅ 「我观察到XX现象很有意思……根据我们在其他项目的经验……」</p>
+        <p class="text-stone-500 text-xs mt-1">说观察不说判断，引用经验不空谈。不确定就说「我记下来会后研究」。</p>
+      </div>
+    </div>
+
+    <div class="scenario-box">
+      <div class="flex items-center gap-2 mb-2"><span class="text-sky-500 font-bold text-sm">场景 3</span><span class="text-stone-800 text-sm font-semibold">听到不懂的术语</span></div>
+      <div class="bg-stone-50 rounded-lg p-3 mb-2">
+        <p class="text-stone-600 text-xs italic">「我们要把LTC流程的转化率提升……」</p>
+      </div>
+      <div class="bg-sky-50 rounded-lg p-3">
+        <p class="text-stone-700 text-xs">✅ 快速记下术语，会后查或问同事。</p>
+        <p class="text-stone-500 text-xs mt-1">不要当场露出困惑表情，不要频繁问「这是什么意思」。会后补课。</p>
+      </div>
+    </div>
+
+    <div class="scenario-box">
+      <div class="flex items-center gap-2 mb-2"><span class="text-violet-500 font-bold text-sm">场景 4</span><span class="text-stone-800 text-sm font-semibold">两个高管意见冲突</span></div>
+      <div class="bg-stone-50 rounded-lg p-3 mb-2">
+        <p class="text-stone-600 text-xs italic">「我觉得应该……」「不对，应该……」</p>
+      </div>
+      <div class="bg-violet-50 rounded-lg p-3">
+        <p class="text-stone-700 text-xs">✅ 不要站队。记录双方观点和论据。</p>
+        <p class="text-stone-500 text-xs mt-1">关注分歧的本质是什么（资源？权力？理念？），这比结论更重要。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Card 14: 乙方顾问生存法则 ===== -->
+<section class="bento-card" style="transition-delay:780ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-amber-100">🛡️</div>
+    <h2 class="text-lg font-bold text-stone-900">乙方顾问生存法则</h2>
+  </div>
+
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">会前</h3>
+  <ul class="space-y-1 text-xs text-stone-600 mb-3">
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>确认自己的角色和发言权限（问项目经理）</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>了解客户内部政治格局（谁和谁不对付）</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>准备好 1-2 个安全的「专业话题」备聊</li>
+  </ul>
+
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">会中</h3>
+  <ul class="space-y-1 text-xs text-stone-600 mb-3">
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>坐在项目组区域，别坐错位置</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>会议记录比 PPT 更重要——记原话</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>少说多听，但适时展现专业度</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>被问到时：先肯定问题价值，再给判断</li>
+  </ul>
+
+  <h3 class="font-semibold text-stone-800 text-sm mb-2">会后</h3>
+  <ul class="space-y-1 text-xs text-stone-600 mb-3">
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>30 分钟内整理会议纪要</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>标注 action items 和责任人</li>
+    <li class="flex gap-2"><span class="text-amber-500">▸</span>不确定的信息标注「待确认」</li>
+  </ul>
+
+  <div class="bg-rose-50 rounded-xl p-3 border border-rose-200/60">
+    <p class="text-rose-700 text-xs font-semibold mb-1">🚫 绝对禁忌</p>
+    <ul class="space-y-1 text-xs text-stone-600">
+      <li>• 不要代替项目经理做任何承诺</li>
+      <li>• 不要在客户面前暴露团队内部分歧</li>
+      <li>• 不要评价任何客户高管</li>
+      <li>• 不要泄露其他客户的信息</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== Card 15: 行业黑话翻译器 ===== -->
+<section class="bento-card" style="transition-delay:840ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-orange-100">📖</div>
+    <h2 class="text-lg font-bold text-stone-900">行业黑话翻译器</h2>
+  </div>
+  <p class="text-stone-500 text-xs mb-3">咨询行业的「加密通话」，听不懂会很尴尬。</p>
+  <div class="space-y-1.5">
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">战略对齐</span><span class="text-stone-500">让所有人朝一个方向使劲</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">赋能</span><span class="text-stone-500">帮助 / 支持（给工具、给资源）</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">闭环</span><span class="text-stone-500">有始有终的完整流程</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">抓手</span><span class="text-stone-500">具体的操作手段和切入点</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">颗粒度</span><span class="text-stone-500">细节的粗细程度</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">对焦</span><span class="text-stone-500">对齐目标、统一认识</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">拉通</span><span class="text-stone-500">让不同部门协同起来</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">向下兼容</span><span class="text-stone-500">新方案不推翻旧做法</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">敏捷迭代</span><span class="text-stone-500">小步快跑，边做边改</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">痛点</span><span class="text-stone-500">客户最头疼的问题</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">卡点</span><span class="text-stone-500">阻塞进度的关键问题</span></div>
+    <div class="flex gap-2 text-sm border-b border-stone-100 pb-1.5"><span class="text-stone-800 font-medium w-20 flex-shrink-0">归因</span><span class="text-stone-500">找到问题的根本原因</span></div>
+    <div class="flex gap-2 text-sm"><span class="text-stone-800 font-medium w-20 flex-shrink-0">向上管理</span><span class="text-stone-500">管理老板的预期（不是拍马屁）</span></div>
+  </div>
+</section>
+
+<!-- ===== Card 16: 避坑指南 ===== -->
+<section class="bento-card" style="transition-delay:900ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-red-100">⚠️</div>
+    <h2 class="text-lg font-bold text-stone-900">新手避坑指南</h2>
+  </div>
+  <div class="space-y-3">
+    <div class="bg-stone-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold">坑 1：把绩效管理理解为「打分」</p>
+      <p class="text-stone-600 text-xs mt-1">这是最大的误区。绩效管理的核心是持续反馈和改进，不是年底打一次分。打分只是管理环节的 1/4。</p>
+    </div>
+    <div class="bg-stone-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold">坑 2：忽视「过程管理」</p>
+      <p class="text-stone-600 text-xs mt-1">只关注结果 → 年底才知道问题。好的绩效管理：季度回顾 + 月度检查 + 实时反馈。</p>
+    </div>
+    <div class="bg-stone-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold">坑 3：迷信工具</p>
+      <p class="text-stone-600 text-xs mt-1">KPI 不是万能的，OKR 也不是。工具服务于目的，不是反过来。先想清楚要解决什么问题，再选工具。</p>
+    </div>
+    <div class="bg-stone-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold">坑 4：绩效结果不应用</p>
+      <p class="text-stone-600 text-xs mt-1">绩效不和薪酬/晋升挂钩 = 没有牙齿的老虎。但也别只挂钩薪酬——会催生短期行为。</p>
+    </div>
+    <div class="bg-stone-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold">坑 5：低估沟通难度</p>
+      <p class="text-stone-600 text-xs mt-1">80% 的绩效问题本质是沟通问题。方案设计再好，传达不到位等于零。</p>
+    </div>
+    <div class="bg-stone-50 rounded-xl p-3">
+      <p class="text-stone-800 text-sm font-semibold">坑 6：忽略组织文化</p>
+      <p class="text-stone-600 text-xs mt-1">在官僚文化中推行 OKR 注定失败。工具必须匹配文化，否则就是拿锤子找钉子。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Card 17: 高频专业词汇 + 最后的叮嘱 (3col) ===== -->
+<section class="bento-card lg:col-span-3" style="transition-delay:960ms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="card-icon bg-indigo-100">📚</div>
+    <h2 class="text-lg font-bold text-stone-900">高频专业词汇速查</h2>
+    <span class="tag bg-indigo-50 text-indigo-600 text-xs">会前过一遍</span>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 mb-6">
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Performance Management</p><p class="text-stone-500 text-xs">绩效管理</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Strategic Decoding</p><p class="text-stone-500 text-xs">战略解码</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">KPI</p><p class="text-stone-500 text-xs">关键绩效指标</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">OKR</p><p class="text-stone-500 text-xs">目标与关键成果</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">BSC</p><p class="text-stone-500 text-xs">平衡计分卡</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">360° Feedback</p><p class="text-stone-500 text-xs">360度反馈</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">MBO</p><p class="text-stone-500 text-xs">目标管理</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">PIP</p><p class="text-stone-500 text-xs">绩效改进计划</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">PDCA Cycle</p><p class="text-stone-500 text-xs">戴明环（计划-执行-检查-改进）</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">SMART</p><p class="text-stone-500 text-xs">SMART原则</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Strategy Map</p><p class="text-stone-500 text-xs">战略地图</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Cascading Goals</p><p class="text-stone-500 text-xs">目标层层分解</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Leading Indicators</p><p class="text-stone-500 text-xs">领先指标</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Lagging Indicators</p><p class="text-stone-500 text-xs">滞后指标</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Forced Ranking</p><p class="text-stone-500 text-xs">强制分布（末位淘汰）</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Competency Model</p><p class="text-stone-500 text-xs">胜任力模型</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Talent Review</p><p class="text-stone-500 text-xs">人才盘点</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Succession Plan</p><p class="text-stone-500 text-xs">继任者计划</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">Equity Incentive</p><p class="text-stone-500 text-xs">股权激励</p></div>
+    <div class="bg-white/60 rounded-xl p-2.5 border border-stone-100"><p class="text-stone-800 text-xs font-semibold">ESG</p><p class="text-stone-500 text-xs">环境·社会·治理</p></div>
+  </div>
+
+  <!-- 最后的叮嘱 -->
+  <div class="bg-gradient-to-r from-amber-100 via-orange-50 to-rose-100 rounded-2xl p-6 border border-amber-200/40">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="card-icon bg-amber-200">🍄</div>
+      <h3 class="text-lg font-bold text-stone-900">最后的叮嘱</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
+      <div class="bg-white/50 rounded-xl p-3 text-center backdrop-blur-sm">
+        <p class="text-2xl mb-2">🎓</p>
+        <p class="text-stone-700 font-medium">你是去学习的</p>
+        <p class="text-stone-500 text-xs">不是去表现</p>
+      </div>
+      <div class="bg-white/50 rounded-xl p-3 text-center backdrop-blur-sm">
+        <p class="text-2xl mb-2">📝</p>
+        <p class="text-stone-700 font-medium">不懂就记</p>
+        <p class="text-stone-500 text-xs">会后问，别当场露怯</p>
+      </div>
+      <div class="bg-white/50 rounded-xl p-3 text-center backdrop-blur-sm">
+        <p class="text-2xl mb-2">👁️</p>
+        <p class="text-stone-700 font-medium">关注「人」的信号</p>
+        <p class="text-stone-500 text-xs">比方案本身更重要</p>
+      </div>
+      <div class="bg-white/50 rounded-xl p-3 text-center backdrop-blur-sm">
+        <p class="text-2xl mb-2">🏫</p>
+        <p class="text-stone-700 font-medium">客户是最好的老师</p>
+        <p class="text-stone-500 text-xs">会场里的信息比书本值钱</p>
+      </div>
+      <div class="bg-white/50 rounded-xl p-3 text-center backdrop-blur-sm">
+        <p class="text-2xl mb-2">💪</p>
+        <p class="text-stone-700 font-medium">你比想象中准备得更充分</p>
+        <p class="text-stone-500 text-xs">这份笔记就是你的底气</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /grid -->
+</div><!-- /container -->
+
+<button id="back-to-top" title="回到顶部">↑</button>
+
+<script>
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('back-to-top').classList.toggle('show', h.scrollTop > 600);
+});
+document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.bento-card').forEach(card => observer.observe(card));
+const checks = document.querySelectorAll('#checklist input[type=checkbox]');
+const saved = JSON.parse(localStorage.getItem('pm-checklist') || '{}');
+checks.forEach((cb, i) => {
+  if (saved[i]) { cb.checked = true; cb.dispatchEvent(new Event('change')); }
+  cb.addEventListener('change', () => {
+    const s = {}; checks.forEach((c, j) => { if (c.checked) s[j] = true; });
+    localStorage.setItem('pm-checklist', JSON.stringify(s));
+  });
+});
+</script>
+</body>
+</html>
